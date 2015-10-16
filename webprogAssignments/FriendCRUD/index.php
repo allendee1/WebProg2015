@@ -1,3 +1,19 @@
+<?php
+    session_start();
+    $name = 'Elietzer Allendes';
+    $message = "Welcome $name";
+    
+    $friend = $_SESSION['friend'];
+    if(!$friend){
+        $_SESSION['friend'] = $friend = array(
+        array( 'FirstName' => 'Erik', 'LastName' => 'Bates', MileTime => 503, Age => 21 ),
+        array( 'FirstName' => 'Moshe', 'LastName' => 'Plotkin', MileTime => 245, Age => 26 ),
+        array( 'FirstName' => 'Aston', 'LastName' => 'Sander', MileTime => 270, Age => 21 ),
+        array( 'FirstName' => 'Chris', 'LastName' => 'Blojemski', MileTime => 500, Age => 22 ),
+        array( 'FirstName' => 'Elietzer', 'LastName' => 'Allendes', MileTime => 246, Age => 21 ),
+        );
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -71,6 +87,61 @@
   </div>
   <!-- ...!!! END OF: Object 2 - Jumbotron !!! ... -->
   
+  
+  
+  <!-- ...!!! Object 3 - CRUD index page !!! ... -->
+  <div class="row">
+            <div class="col-md-8 col-xs-10">
+                <a href="edit.php" class="btn btn-success">
+                    <i class="glyphicon glyphicon-plus"></i> Add New Friend
+                </a>
+                <a href="#" class="btn btn-danger">
+                    <i class="glyphicon glyphicon-trash"></i> Delete All Friends
+                    <span class="badge"><?=count($friend)?></span>
+                </a>
+                <table class="table table-condensed table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>FirstName</th>
+                            <th>LastName</th>
+                            <th>MileTime</th>
+                            <th>Age</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach($friend as $i => $friendColumn): ?>
+                <tr>
+                  <th scope="row">
+                      <div class="btn-group" role="group" aria-label="...">
+                      <a href="view.php?id=<?=$i?>" title="View" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-eye-open"></i></a>
+                      <a href="edit.php?id=<?=$i?>" title="Edit" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-edit"></i></a>
+                      <a href="delete.php?id=<?=$i?>" title="Delete" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-trash"></i></a>
+                  </div>
+                  </th>
+                  
+                  <td><?=$friendColumn['FirstName']?></td>
+                  <td><?=$friendColumn['LastName']?></td>
+                  <td><?=$friendColumn['MileTime']?></td>
+                  <td><?=$friendColumn['Age']?></td>
+                </tr>
+                <?php endforeach; ?>
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="col-md-4 col-xs-10">
+                <div class="alert alert-success" role="alert">
+                    You did well
+                </div>
+                <div class="alert alert-danger" role="alert">
+                    Oh no! You messed up.
+                </div>
+
+            </div>
+        </div>
+  
+  <!-- ...!!! END OF: Object 3 - CRUD index page !!! ... -->
   </div>
   
   
